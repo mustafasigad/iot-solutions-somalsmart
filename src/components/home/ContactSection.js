@@ -63,7 +63,7 @@ export default function ContactSection() {
           <div className="flex flex-col md:flex-row justify-center gap-8 mb-8">
             <a href="mailto:contact@iotsolutions.com" className="flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700">
               <Mail className="h-5 w-5" />
-              contact@somalSmart.com
+              contact@hiilcore.com
             </a>
             <a href="tel:+1234567890" className="flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700">
               <Phone className="h-5 w-5" />
