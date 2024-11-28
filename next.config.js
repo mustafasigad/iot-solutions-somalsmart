@@ -7,9 +7,9 @@ const nextConfig = {
   },
   // Add env configuration here
   env: {
-    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+    // SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
-  basePath: '/iot-solutions-somalsmart',
+  // basePath: '/iot-solutions-somalsmart',
 };
 
 module.exports = nextConfig;
