@@ -10,8 +10,4 @@ const nextConfig = {
   },
   basePath: '/iot-solutions-somalsmart/',
   trailingSlash: true
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 350d92d9b2f9bdc3b06c116c5ca553e9be568716
