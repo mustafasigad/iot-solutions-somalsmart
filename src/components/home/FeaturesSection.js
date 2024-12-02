@@ -1,6 +1,4 @@
-// src/components/home/FeaturesSection.js
-"use client"
-
+"use client";
 import { useEffect, useRef } from 'react';
 import { Activity, Bell, Zap, Cloud, Shield, Laptop } from 'lucide-react';
 
@@ -32,32 +30,32 @@ export default function FeaturesSection() {
 
   const features = [
     {
-      icon: <Activity className="h-8 w-8" />,
+      icon: <Activity className="h-12 w-12 text-blue-500 mb-4" />,
       title: "Real-time Monitoring",
       description: "Access your data anytime, anywhere with our cloud-based monitoring system."
     },
     {
-      icon: <Bell className="h-8 w-8" />,
+      icon: <Bell className="h-12 w-12 text-green-500 mb-4" />,
       title: "Instant Alerts",
       description: "Receive immediate notifications when critical thresholds are reached."
     },
     {
-      icon: <Cloud className="h-8 w-8" />,
+      icon: <Cloud className="h-12 w-12 text-purple-500 mb-4" />,
       title: "Cloud Integration",
       description: "Seamlessly sync and store your data in the cloud for easy access."
     },
     {
-      icon: <Shield className="h-8 w-8" />,
+      icon: <Shield className="h-12 w-12 text-red-500 mb-4" />,
       title: "Advanced Security",
       description: "Enterprise-grade security to protect your sensitive IoT data."
     },
     {
-      icon: <Laptop className="h-8 w-8" />,
+      icon: <Laptop className="h-12 w-12 text-yellow-500 mb-4" />,
       title: "Remote Management",
       description: "Control and configure your devices from anywhere in the world."
     },
     {
-      icon: <Zap className="h-8 w-8" />,
+      icon: <Zap className="h-12 w-12 text-orange-500 mb-4" />,
       title: "Easy Integration",
       description: "Seamlessly integrate with your existing systems and workflows."
     }
@@ -69,19 +67,22 @@ export default function FeaturesSection() {
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           Why Choose Our IoT Solutions?
         </h2>
+        <p className="text-center mb-12 text-xl text-gray-700 max-w-2xl mx-auto">
+          Our IoT solutions offer unmatched technical capabilities that empower businesses to stay ahead in a rapidly evolving technological landscape.
+        </p>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
             <div
               key={index}
               ref={(el) => (featuresRef.current[index] = el)}
-              className="bg-white p-6 rounded-lg shadow-lg transform opacity-0 translate-y-8 transition-all duration-700 hover:shadow-xl hover:-translate-y-1"
+              className="bg-white p-8 rounded-lg shadow-lg transform opacity-0 translate-y-8 transition-all duration-700 hover:shadow-xl hover:-translate-y-1"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="mb-4 text-blue-500 group-hover:text-blue-600 transition-colors">
+              <div className="flex justify-center">
                 {feature.icon}
               </div>
-              <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <h3 className="text-xl font-semibold mb-3 text-center">{feature.title}</h3>
+              <p className="text-gray-600 text-center">{feature.description}</p>
             </div>
           ))}
         </div>
