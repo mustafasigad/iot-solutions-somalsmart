@@ -2,40 +2,61 @@
 import { NextResponse } from 'next/server';
 import sgMail from '@sendgrid/mail';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const body = await request.json();
-    
-    const msg = {
-      to: 'janodones@gmail.com', // Your email
-      from: 'your-verified-sender@yourdomain.com', // The email you verified with SendGrid
-      subject: 'New IoT Solutions Inquiry',
-      text: `
-New inquiry from: ${body.name}
-Email: ${body.email}
-Phone: ${body.phone}
+    const formData = await req.formData();
+    const name = formData.get('name');
+    const email = formData.get('email');
+    const phone = formData.get('phone');
+    const requirements = formData.get('requirements');
+    const attachment = formData.get('attachment');
 
-Requirements:
-${body.requirements}
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+    let attachments = [];
+    if (attachment) {
+      const buffer = await attachment.arrayBuffer();
+      const base64Content = Buffer.from(buffer).toString('base64');
+      
+      attachments.push({
+        content: base64Content,
+        filename: attachment.name,
+        type: attachment.type,
+        disposition: 'attachment'
+      });
+    }
+
+    const msg = {
+      to: process.env.RECIPIENT_EMAIL,
+      from: process.env.SENDGRID_FROM_EMAIL,
+      subject: 'New Contact Form Submission - HiilCore',
+      text: `
+Name: ${name}
+Email: ${email}
+Phone: ${phone || 'Not provided'}
+Requirements: ${requirements}
       `,
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2 style="color: #2563eb;">New IoT Solutions Inquiry</h2>
-          <p><strong>Name:</strong> ${body.name}</p>
-          <p><strong>Email:</strong> ${body.email}</p>
-          <p><strong>Phone:</strong> ${body.phone}</p>
-          <p><strong>Requirements:</strong></p>
-          <p style="white-space: pre-line;">${body.requirements}</p>
-        </div>
-      `
+<h2>New Contact Form Submission</h2>
+<p><strong>Name:</strong> ${name}</p>
+<p><strong>Email:</strong> ${email}</p>
+<p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
+<p><strong>Requirements:</strong><br>${requirements.replace(/\n/g, '<br>')}</p>
+      `,
+      attachments
     };
 
     await sgMail.send(msg);
-    return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
+
+    return NextResponse.json(
+      { message: 'Email sent successfully' },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error sending email:', error);
-    return NextResponse.json({ error: 'Failed to send email' }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Failed to send email' },
+      { status: 500 }
+    );
   }
 }
