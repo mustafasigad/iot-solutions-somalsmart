@@ -108,7 +108,7 @@ export default function ProfessionalServices() {
       formDataToSend.append('time', formData.time);
       formDataToSend.append('selectedService', formData.selectedService);
       formDataToSend.append('requirements', formData.requirements);
-      formDataToSend.append('to', 'janodones@gmail.com');
+      formDataToSend.append('to', 'info@hiilcore.com');
       if (file) {
         formDataToSend.append('attachment', file);
       }
@@ -234,21 +234,22 @@ export default function ProfessionalServices() {
               <h3 className="text-2xl font-bold mb-6 text-gray-800">Schedule IoT Consultation</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                    placeholder="Your name"
-                  />
-                </div>
+              <div>
+  <label htmlFor="name" className="block text-sm font-medium text-black mb-1">
+    Name *
+  </label>
+  <input
+    type="text"
+    id="name"
+    name="name"
+    required
+    value={formData.name}
+    onChange={handleChange}
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black focus:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
+    placeholder="Your name"
+  />
+</div>
+
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -261,7 +262,7 @@ export default function ProfessionalServices() {
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black focus:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
                     placeholder="your.email@example.com"
                   />
                 </div>
@@ -276,66 +277,70 @@ export default function ProfessionalServices() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black focus:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
                     placeholder="+1 (234) 567-8900"
                   />
                 </div>
-
                 <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-                      Preferred Date *
-                    </label>
-                    <input
-                      type="date"
-                      id="date"
-                      name="date"
-                      required
-                      min={minDate}
-                      value={formData.date}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                    />
-                  </div>
+  <div>
+    <label htmlFor="date" className="block text-sm font-medium text-black mb-1">
+      Preferred Date *
+    </label>
+    <input
+      type="date"
+      id="date"
+      name="date"
+      required
+      min={minDate}
+      value={formData.date}
+      onChange={handleChange}
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black focus:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
+    />
+  </div>
 
-                  <div>
-                    <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">
-                      Preferred Time *
-                    </label>
-                    <input
-                      type="time"
-                      id="time"
-                      name="time"
-                      required
-                      value={formData.time}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="selectedService" className="block text-sm font-medium text-gray-700 mb-1">
-                    Service of Interest *
-                  </label>
-                  <select
-                    id="selectedService"
-                    name="selectedService"
-                    required
-                    value={formData.selectedService}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-                  >
-                    <option value="">Select an IoT service</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service.title}>
-                        {service.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+  <div>
+    <label htmlFor="time" className="block text-sm font-medium text-black mb-1">
+      Preferred Time *
+    </label>
+    <input
+      type="time"
+      id="time"
+      name="time"
+      required
+      value={formData.time}
+      onChange={handleChange}
+      className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black focus:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
+    />
+  </div>
+</div>
 
                 <div>
+  <label
+    htmlFor="selectedService"
+    className="block text-sm font-medium text-gray-700 mb-1"
+  >
+    Service of Interest *
+  </label>
+  <select
+    id="selectedService"
+    name="selectedService"
+    required
+    value={formData.selectedService}
+    onChange={handleChange}
+    className={`w-full px-4 py-2 border border-gray-300 rounded-lg outline-none ${
+      formData.selectedService ? 'bg-white' : 'bg-gray-200 text-gray-900'
+    } hover:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500`}
+  >
+    <option value="">Select an IoT service</option>
+    {services.map((service, index) => (
+      <option key={index} value={service.title} className="text-gray-900">
+        {service.title}
+      </option>
+    ))}
+  </select>
+</div>
+
+             <div>
                   <label htmlFor="requirements" className="block text-sm font-medium text-gray-700 mb-1">
                     Project Requirements *
                   </label>
@@ -346,7 +351,7 @@ export default function ProfessionalServices() {
                     rows={4}
                     value={formData.requirements}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-y min-h-[100px]"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white text-black focus:bg-gray-100 focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none"
                     placeholder="Please describe your IoT project requirements..."
                   />
                 </div>
