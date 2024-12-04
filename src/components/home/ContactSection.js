@@ -25,15 +25,20 @@ export default function ContactSection() {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('phone', formData.phone);
       formDataToSend.append('requirements', formData.requirements);
-      formDataToSend.append('to', 'janodones@gmail.com');
+      formDataToSend.append('to', 'info@hiilcore.com');
       if (file) {
         formDataToSend.append('attachment', file);
       }
 
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        body: formDataToSend,
-      });
+      // const response = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   body: formDataToSend,
+      // });
+      // In handleSubmit function, change the fetch URL from '/api/contact' to:
+const response = await fetch('http://localhost:5000/api/contact', {
+  method: 'POST',
+  body: formDataToSend,
+});
 
       if (response.ok) {
         setSubmitStatus('success');
@@ -106,7 +111,7 @@ export default function ContactSection() {
             className="flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
           >
             <Mail className="h-6 w-6" />
-            contact@hiilcore.com
+            info@hiilcore.com
           </a>
           <a
             href="tel:+97433782295"
