@@ -2,7 +2,7 @@
 import Header from '../../components/layout/Header';
 import Footer from '../../components/layout/Footer';
 import ProfessionalServices from '../../components/solutions/ProfessionalServices';
-import SolutionArchitecture from '../../components/solutions/SolutionArchitecture';
+
 
 
 export default function SolutionsPage() {
@@ -20,7 +20,7 @@ export default function SolutionsPage() {
             </p>
             <div className="space-y-16">
               <ProfessionalServices />
-              <SolutionArchitecture />
+        
              
             </div>
           </div>
