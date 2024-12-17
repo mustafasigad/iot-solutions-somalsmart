@@ -1,4 +1,4 @@
-// src/components/home/ContactSection.js
+
 "use client";
 import { useState } from 'react';
 import { Mail, Phone, X, Send, Upload, File, Trash2 } from 'lucide-react';
@@ -25,12 +25,12 @@ export default function ContactSection() {
       formDataToSend.append('email', formData.email);
       formDataToSend.append('phone', formData.phone);
       formDataToSend.append('requirements', formData.requirements);
-      formDataToSend.append('to', 'janodones@gmail.com');
+      formDataToSend.append('to', 'info@hiilcore.com');
       if (file) {
         formDataToSend.append('attachment', file);
       }
 
-      const response = await fetch('/api/contact', {
+      const response = await fetch('http://localhost:5000/api/contact', {
         method: 'POST',
         body: formDataToSend,
       });
@@ -92,89 +92,122 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="pt-20 py-16 px-6 bg-gray-50">
-      <div className="container mx-auto">
-        <div className="max-w-2xl mx-auto text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Contact Us</h2>
-          <p className="text-xl text-gray-700">
-            Have questions or need a custom solution? Reach out to us and we'll get back to you promptly.
+    <section id="contact" className="py-24 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white">
+  <div className="absolute inset-0 opacity-20" 
+       style={{ backgroundImage: 'radial-gradient(#9ca3af 1px, transparent 1px)', backgroundSize: '30px 30px' }}>
+  </div>
+</div>
+
+      <div className="container mx-auto relative z-10 px-6">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold mb-6 text-black">
+            Let's Work Together
+          </h2>
+          <p className="text-xl text-gray-700 leading-relaxed">
+            Have questions or need a custom solution? Our team of experts is ready to help transform your ideas into reality.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row justify-center gap-8 mb-8">
-          <a
-            href="mailto:contact@hiilcore.com"
-            className="flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <Mail className="h-6 w-6" />
-            contact@hiilcore.com
+
+        {/* Contact Cards */}
+        <div className="flex flex-col md:flex-row justify-center gap-8 mb-16">
+          <a href="mailto:info@hiilcore.com" 
+             className="group flex items-center justify-center gap-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+          <div className="p-4 bg-amber-50 rounded-full group-hover:bg-amber-100 transition-colors">
+          <Mail className="h-6 w-6 text-amber-800" />
+            </div>
+            <div className="text-left">
+              <div className="text-sm text-gray-500 mb-1">Email Us</div>
+              <div className="font-semibold text-gray-900">info@hiilcore.com</div>
+            </div>
           </a>
-          <a
-            href="tel:+97433782295"
-            className="flex items-center justify-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <Phone className="h-6 w-6" />
-            +974 (33) 782-295
+
+          <a href="tel:+97433782295"
+             className="group flex items-center justify-center gap-4 p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+         <div className="p-4 bg-amber-50 rounded-full group-hover:bg-amber-100 transition-colors">
+              <Phone className="h-6 w-6 text-amber-800"/>
+            </div>
+            <div className="text-left">
+              <div className="text-sm text-gray-500 mb-1">Call Us</div>
+              <div className="font-semibold text-gray-900">+974 (33) 782-295</div>
+            </div>
           </a>
         </div>
+
         <div className="text-center">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-8 py-3 rounded-full shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-300"
+            className="group relative px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-full text-lg font-semibold shadow-lg 
+                     hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-105"
           >
-            Send Us Your Requirements
+            <span className="flex items-center gap-2">
+            <Send className="w-5 h-5 text-white" />
+              Send Us Your Requirements
+            </span>
+            <div className="absolute inset-0 rounded-full bg-white opacity-0 group-hover:opacity-20 transition-opacity"></div>
           </button>
         </div>
       </div>
 
-      {/* Contact Form Modal */}
+      {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl w-full max-w-lg p-6 relative max-h-[90vh] overflow-y-auto">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
-              aria-label="Close modal"
-            >
-              <X size={24} />
-            </button>
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+             onClick={(e) => e.target === e.currentTarget && setIsModalOpen(false)}>
+          <div className="bg-white rounded-2xl w-full max-w-2xl p-8 relative max-h-[90vh] overflow-y-auto"
+               onClick={e => e.stopPropagation()}>
+            <div className="absolute top-6 right-6">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+                aria-label="Close modal"
+              >
+                <X size={24} className="text-gray-500" />
+              </button>
+            </div>
             
-            <h3 className="text-2xl font-bold mb-6">Send Your Requirements</h3>
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900">Send Your Requirements</h3>
+              <p className="text-gray-600 mt-2">Fill out the form below and we'll get back to you shortly.</p>
+            </div>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
-                  placeholder="Your name"
-                />
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    Name <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                    placeholder="Your name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                    Email <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
+                    placeholder="your.email@example.com"
+                  />
+                </div>
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
                   Phone Number
                 </label>
                 <input
@@ -183,14 +216,14 @@ export default function ContactSection() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all"
                   placeholder="+1 (234) 567-8900"
                 />
               </div>
 
               <div>
-                <label htmlFor="requirements" className="block text-sm font-medium text-gray-700 mb-1">
-                  Your Requirements *
+                <label htmlFor="requirements" className="block text-sm font-medium text-gray-700 mb-2">
+                  Your Requirements <span className="text-rose-500">*</span>
                 </label>
                 <textarea
                   id="requirements"
@@ -199,26 +232,27 @@ export default function ContactSection() {
                   rows={4}
                   value={formData.requirements}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow resize-y min-h-[100px]"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all resize-y min-h-[120px]"
                   placeholder="Please describe your project or requirements..."
                 />
               </div>
 
               {/* File Upload Section */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Attach Document (Optional)
                 </label>
                 {!file ? (
                   <div
                     onDragOver={handleDragOver}
                     onDrop={handleDrop}
-                    className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-400 transition-colors cursor-pointer"
+                    className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl 
+                             hover:border-emerald-400 transition-all cursor-pointer bg-gray-50 hover:bg-emerald-50"
                   >
                     <div className="space-y-2 text-center">
-                      <Upload className="mx-auto h-12 w-12 text-gray-400" />
+                    <Upload className="mx-auto h-12 w-12 text-amber-800" />
                       <div className="flex text-sm text-gray-600">
-                        <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none">
+                        <label htmlFor="file-upload" className="relative cursor-pointer rounded-md font-medium text-emerald-600 hover:text-emerald-500">
                           <span>Upload a file</span>
                           <input
                             id="file-upload"
@@ -237,16 +271,16 @@ export default function ContactSection() {
                     </div>
                   </div>
                 ) : (
-                  <div className="mt-1 flex items-center space-x-2 p-3 border border-gray-300 rounded-lg bg-gray-50">
-                    <File className="h-6 w-6 text-blue-500" />
-                    <span className="flex-1 truncate text-sm">{file.name}</span>
+                  <div className="mt-1 flex items-center gap-3 p-4 border border-gray-300 rounded-xl bg-emerald-50">
+                <File className="h-6 w-6 text-amber-800 flex-shrink-0" />
+                    <span className="flex-1 truncate text-sm font-medium text-gray-900">{file.name}</span>
                     <button
                       type="button"
                       onClick={removeFile}
-                      className="text-red-500 hover:text-red-700 transition-colors"
+                      className="p-2 hover:bg-emerald-100 rounded-full transition-colors"
                       aria-label="Remove file"
                     >
-                      <Trash2 className="h-5 w-5" />
+                      <Trash2 className="h-5 w-5 text-rose-500" />
                     </button>
                   </div>
                 )}
@@ -255,9 +289,12 @@ export default function ContactSection() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full py-3 px-6 rounded-lg flex items-center justify-center space-x-2 
-                  ${isSubmitting ? 'bg-gray-400' : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800'}
-                  text-white font-semibold transition-all duration-300 transform hover:scale-[1.02]`}
+                className={`w-full py-4 rounded-xl flex items-center justify-center gap-2 text-lg font-semibold
+                  ${isSubmitting 
+                    ? 'bg-gray-400 cursor-not-allowed' 
+                    : 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600'
+                  }
+                  text-white transition-all duration-300 transform hover:scale-[1.02]`}
               >
                 {isSubmitting ? (
                   <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent" />
@@ -269,15 +306,17 @@ export default function ContactSection() {
                 )}
               </button>
 
-              {submitStatus === 'success' && (
-                <div className="text-green-600 text-center mt-4 font-medium">
-                  Message sent successfully!
-                </div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <div className="text-red-600 text-center mt-4 font-medium">
-                  Failed to send message. Please try again.
+              {submitStatus && (
+                <div className={`
+                  text-center p-4 rounded-xl mt-4 font-medium
+                  ${submitStatus === 'success' 
+                    ? 'bg-emerald-50 text-emerald-700' 
+                    : 'bg-rose-50 text-rose-700'
+                  }
+                `}>
+                  {submitStatus === 'success' 
+                    ? 'Message sent successfully!' 
+                    : 'Failed to send message. Please try again.'}
                 </div>
               )}
             </form>
